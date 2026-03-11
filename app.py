@@ -254,7 +254,7 @@ def draw_truck_3d(packer):
 
     fig.add_trace(go.Scatter3d(
         x=[truck_w/2, truck_w/2], y=[0, truck_l], z=[truck_h*1.1, truck_h*1.1],
-        mode='text', text=['⬇ ' + LABELS['cab'], '⬇ ' + LABELS['door']], 
+        mode='text', text=[LABELS['cab'], LABELS['door']],
         textfont=dict(color="white", size=14)
     ))
 
@@ -379,11 +379,11 @@ if 'cargo_data' not in st.session_state:
 def set_dirty():
     st.session_state.is_dirty = True
 
-st.title("🚛 Pro 貨車疊貨模擬器 V7.5")
+st.title("Pro 貨車疊貨模擬器 V7.5")
 
 # --- 側邊欄 ---
 with st.sidebar:
-    st.header("⚙️ 貨車參數")
+    st.header("貨車參數")
     
     preset_names = list(st.session_state.truck_presets.keys())
     selected_preset = st.selectbox("選擇車型", ["自訂尺寸"] + preset_names)
@@ -409,7 +409,7 @@ with st.sidebar:
     st.session_state.truck_dims = (truck_w, truck_l, truck_h)
     st.session_state.truck_dims = (truck_w, truck_l, truck_h)
     
-    with st.expander("💾 預設管理", expanded=False):
+    with st.expander("預設管理", expanded=False):
         new_preset_name = st.text_input("預設名稱", value=st.session_state.preset_input_val, key="preset_input_key")
         
         col_p1, col_p2 = st.columns(2)
@@ -440,9 +440,9 @@ with st.sidebar:
 
 # --- 貨物清單 ---
 if st.session_state.is_dirty and st.session_state.results:
-    st.warning("資料已變更，請重新計算。", icon="⚠️")
+    st.warning("資料已變更，請重新計算。")
 
-st.subheader("📦 貨物清單")
+st.subheader("貨物清單")
 
 required_cols = ["名稱", "寬", "長", "高", "數量", "最大堆疊層數", "顏色"]
 up_col, dl_col = st.columns([2.4, 1.1])
@@ -465,7 +465,7 @@ with dl_col:
     st.markdown("**下載 CSV 範本**")
     template_df = pd.DataFrame(columns=required_cols)
     template_csv = template_df.to_csv(index=False).encode('utf-8-sig')
-    st.download_button("📥 下載 CSV 範本", data=template_csv, file_name="cargo_template.csv", mime="text/csv", use_container_width=True)
+    st.download_button("下載 CSV 範本", data=template_csv, file_name="cargo_template.csv", mime="text/csv", use_container_width=True)
     st.caption(f"欄位：{', '.join(required_cols)}")
 
 edited_df = st.data_editor(
@@ -526,7 +526,7 @@ def run_packer(mode, items, progress_slot=None):
     return packer
 
 # 主計算按鈕
-if st.button("🚀 開始計算 (Start Calculation)", type="primary", use_container_width=True):
+if st.button("開始計算 (Start Calculation)", type="primary", use_container_width=True):
     items = prepare_items()
     if not items:
         st.error("清單為空")
@@ -551,7 +551,7 @@ if st.button("🚀 開始計算 (Start Calculation)", type="primary", use_contai
 if st.session_state.results:
     
     # 建立 Tabs，無論是否有結果都顯示 Tab
-    tab_labels = ["🟢 正常 (Strict)", "🟡 混合 (Mixed)", "🔴 極限 (Extreme)"]
+    tab_labels = ["正常 (Strict)", "混合 (Mixed)", "極限 (Extreme)"]
     tabs = st.tabs(tab_labels)
     
     modes = ['strict', 'mixed', 'extreme']
@@ -567,9 +567,9 @@ if st.session_state.results:
                 # 結果顯示
                 leftover = len(packer.unpacked_items)
                 if leftover == 0:
-                    st.success(f"✅ 全部裝載完成 (剩餘 0 箱)")
+                    st.success(f"全部裝載完成 (剩餘 0 箱)")
                 else:
-                    st.error(f"⚠️ 還有 {leftover} 箱裝不下")
+                    st.error(f"還有 {leftover} 箱裝不下")
                 
                 st.markdown("### 裝載摘要")
                 c1, c2, c3 = st.columns(3)
@@ -580,7 +580,7 @@ if st.session_state.results:
                 c2.metric("成功裝載", f"{len(packer.packed_items)} 箱")
                 c3.metric("未裝載", f"{len(packer.unpacked_items)} 箱")
                 
-                sub_t1, sub_t2, sub_t3 = st.tabs(["📦 3D 視圖", "📐 工程三視圖", "📝 清單"])
+                sub_t1, sub_t2, sub_t3 = st.tabs(["3D 視圖", "工程三視圖", "清單"])
                 with sub_t1:
                     st.plotly_chart(draw_truck_3d(packer), use_container_width=True)
                     used_names = sorted(list(set([item.name for item in packer.packed_items])))
