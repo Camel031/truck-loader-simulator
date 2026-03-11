@@ -1,4 +1,4 @@
-# 🚛 Pro 貨車疊貨模擬器
+# Pro 貨車疊貨模擬器
 
 A 3D truck loading simulator built with Streamlit. Input cargo dimensions and quantities to visualize optimal packing arrangements with interactive 3D and engineering 2D views.
 
@@ -11,9 +11,9 @@ A 3D truck loading simulator built with Streamlit. Input cargo dimensions and qu
 - **3D Interactive View** — rotate and inspect the packing result via Plotly
 - **Engineering 2D Views** — top / side / rear orthographic drawings via Matplotlib
 - **Three Packing Modes**
-  - 🟢 **Strict** — same-type stacking only, grouped by item ID
-  - 🟡 **Mixed** — height-first sorting, no cross-type stacking
-  - 🔴 **Extreme** — all 6 orientations allowed, cross-type stacking enabled
+  - **Strict** — same-type stacking only, grouped by item ID
+  - **Mixed** — height-first sorting, no cross-type stacking
+  - **Extreme** — all 6 orientations allowed, cross-type stacking enabled
 - **Auto Escalation** — automatically runs Mixed → Extreme if items remain unpacked
 - **CSV Import / Export** — upload custom cargo lists; download blank template
 - **Truck Presets** — save, rename, and delete custom truck size presets
