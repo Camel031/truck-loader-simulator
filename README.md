@@ -2,7 +2,7 @@
 
 A 3D truck loading simulator built with Streamlit. Input cargo dimensions and quantities to visualize optimal packing arrangements with interactive 3D and engineering 2D views.
 
-**Live Demo:** *(deploy to Streamlit Community Cloud and paste URL here)*
+**Live Demo:** https://truck-loader-simulator.streamlit.app
 
 ---
 
@@ -20,7 +20,7 @@ A 3D truck loading simulator built with Streamlit. Input cargo dimensions and qu
 
 ## Screenshot
 
-> *(add screenshot here)*
+![3D packing result](screenshot.png)
 
 ## Quick Start
 
